@@ -16,7 +16,7 @@ variable "region" {
 
 variable "zones" {
   type    = list(string)
-  default = ["a", "b"]
+  default = ["a", "b", "c"]
 }
 
 resource "random_pet" "network" {

@@ -16,7 +16,7 @@ variable "game" {
 
 variable "server_count" {
   type    = number
-  default = 2
+  default = 3
 }
 
 resource "random_pet" "server" {
