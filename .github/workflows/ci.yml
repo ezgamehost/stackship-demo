@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        stack: [network, app]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.13.2
+      - run: tofu fmt -check -recursive
+        working-directory: stacks/${{ matrix.stack }}
+      - run: tofu init -backend=false -input=false
+        working-directory: stacks/${{ matrix.stack }}
+      - run: tofu validate
+        working-directory: stacks/${{ matrix.stack }}
